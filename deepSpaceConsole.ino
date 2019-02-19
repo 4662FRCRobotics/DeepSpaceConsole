@@ -1,13 +1,23 @@
-#include <LiquidCrystal_I2C.h>
-
 #include <Joystick.h>
-
-
+#include <LiquidCrystal_I2C.h>
+/*
+* name id 
+* constant for type 
+* number of buttons (limit 16 on drivestation) 
+* number of POV hats (limit 2)
+* x axis t/f 
+* y axis t/f 
+* z axis t/f 
+* rudder / paddle / other names of no meaning to me 4 * t/f  
+* throttle t/f 
+* 3 * t/f 
+* see arduino joystick on github for more info 
+*/
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
-16, 2,
-true, true, true,
+16, 0,
 false, false, false,
-false, true,
+false, false, false,
+false, false,
 false, false, false);
 
 LiquidCrystal_I2C lcd(0x3F, 20, 4);
@@ -36,18 +46,18 @@ const int pinToButtonMap = 4;
 
 int lastSwitchState[10] = {0,0,0,0,0,0,0,0,0,0};
 String armPositions[10] = {"park     ",
-                                 "ball1      ",
-                                 "ball2      ",
-                                 "ball3      ",
-                                 "port1      ",
-                                 "port2      ",
-                                 "port3      ",
-                                 "spair1     ",
-                                 "spair2     ",
-                                 "spair3     "
+                                 "ball1     ",
+                                 "ball2     ",
+                                 "ball3     ",
+                                 "port1     ",
+                                 "port2     ",
+                                 "port3     ",
+                                 "spare1    ",
+                                 "spare2    ",
+                                 "spare3    "
                                  };
                                  
-  String strPosSwitchStatement = "N/A    ";
+  String strPosSwitchStatement = "V3 2/19/19";
                                  
 void loop() {
   lcd.home();
