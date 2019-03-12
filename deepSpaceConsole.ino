@@ -52,8 +52,8 @@ String armPositions[10] = {"park     ",
                                  "port1     ",
                                  "port2     ",
                                  "port3     ",
-                                 "spare1    ",
-                                 "spare2    ",
+                                 "ballcs    ",
+                                 "portcs    ",
                                  "spare3    "
                                  };
                                  
