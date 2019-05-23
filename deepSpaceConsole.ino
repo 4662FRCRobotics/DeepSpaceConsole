@@ -14,13 +14,21 @@
 * see arduino joystick on github for more info 
 */
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
-16, 0,
-false, false, false,
-false, false, false,
+16, 1,
+false, false, false, 
+false, false, false,  
 false, false,
 false, false, false);
 
 LiquidCrystal_I2C lcd(0x3F, 20, 4);
+
+int PosSwPin = A0;
+int PosSwMax = 1023;
+int PosSwMin = 0;
+int PosSwSegments = 5;
+int PosSwIncrement = PosSwMax / PosSwSegments;
+int PosSwMidPoint = PosSwIncrement / 2;
+int PosSwPosition = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -81,5 +89,29 @@ void loop() {
    }
    lcd.setCursor(10,0);
    lcd.print(strPosSwitchStatement);
+
+   int PosSwValue = analogRead(PosSwPin);
+
+   int PosSwPosition = (PosSwValue * PosSwSegments + PosSwMidPoint) / PosSwMax;
+   lcd.setCursor(0,1);
+   lcd.print("StartPos:");
+
+   String strStartPos = "Teleop";
+
+   switch(PosSwPosition){
+    case 1:
+      strStartPos = "LeftHab2  ";
+      break;
+    case 2:
+      strStartPos = "RightHab2 ";
+      break;
+    default :
+      strStartPos = "Teleop    ";
+
+   }
+   lcd.setCursor(10,1);
+   lcd.print(strStartPos);
+
+   Joystick.setHatSwitch(0, PosSwPosition*45);
   
 }
