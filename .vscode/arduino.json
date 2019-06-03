@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:leonardo",
-    "port": "COM10",
+    "port": "COM12",
     "sketch": "deepSpaceConsole.ino"
 }
